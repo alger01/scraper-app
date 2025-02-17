@@ -63,7 +63,7 @@ def duapune_job_data(url):
 
 def karrieraAl(main_url):
     job_links = []
-    url = main_url + "?faqe="
+    url = main_url + "&faqe="
     base_url = "https://karriera.al"
     page_no = 1  
 
