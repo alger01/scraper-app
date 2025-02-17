@@ -37,14 +37,12 @@ def fetch_data_from_url(url):
 def generate_csv_content(data):
     output = io.StringIO()
     writer = csv.writer(output)
-    # Write header row
-    writer.writerow([
-        "Title", "Category", "Salary", "Company", "Date Posted",
-        "Job Type", "Requirements", "Description", "Portal", "URL"
-    ])
-    # Write data rows
-    for job in data:
-        writer.writerow(job.to_csv_row())
+
+    # Write the data rows
+    for row in data:
+        row_data = row.split("~")  # Use "~" as delimiter
+        writer.writerow(row_data)  # Write the row to CSV
+
     return output.getvalue()
 
 
@@ -88,7 +86,7 @@ if st.button("Fetch Data"):
         if is_valid_url(url_input):
             raw_data = fetch_data_from_url(url_input)
             if raw_data:
-                csv_content = raw_data
+                csv_content = generate_csv_content(raw_data)
                 st.download_button(
                     label="Download CSV",
                     data=csv_content,
