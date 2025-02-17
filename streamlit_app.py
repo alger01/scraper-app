@@ -46,11 +46,10 @@ def list_to_csv(data_list):
 def get_company_image(company_name):
     company_images = {
         "Dua Pune": "images/duaPune.png",
-        "Anegino": "images/anegino.png",
-        "EPPC": "images/eppc.png",
+        "Njoftime Al": "images/njoftime.png",
+        "Gjirafa": "images/Gjirafa.png",
         "Karriera": "images/karriera.png",
-        "Profesionisti": "images/profesionisti.png",
-        "Puna Juaj": "images/punaJuaj.png"
+        "Profesionist": "images/profesionist.png",
     }
     return company_images.get(company_name, "images/default_logo.png")
 
@@ -72,7 +71,7 @@ def is_valid_url(url):
         return False
 
 
-companies = ["Dua Pune", "Anegino", "EPPC", "Karriera", "Profesionisti", "Puna Juaj"]
+companies = ["Dua Pune", "Njoftime Al", "Gjirafa", "Karriera", "Profesionist"]
 
 st.title("Job Portal Data Aggregator")
 
