@@ -20,11 +20,11 @@ st.markdown(
 )
 
 actions = {
-    "duaPune": duaPune,
-    "karrieraAl": karrieraAl,
-    "njoftime": njoftimePuneAl,
+    "duapune": duaPune,
+    "karriera.al": karrieraAl,
+    "njoftime.al": njoftimePuneAl,
     "gjirafa": GjirafaPune,
-    "profesionisti": ProfesionistiAl
+    "profesionist": ProfesionistiAl
 }
 
 def fetch_data_from_url(url):
@@ -34,17 +34,14 @@ def fetch_data_from_url(url):
             return data
 
 
-def generate_csv_content(data):
+def list_to_csv(data_list):
     output = io.StringIO()
-    writer = csv.writer(output)
+    writer = csv.writer(output, delimiter="~")  # Use "~" as the delimiter
 
-    # Write the data rows
-    for row in data:
-        row_data = row.split("~")  # Use "~" as delimiter
-        writer.writerow(row_data)  # Write the row to CSV
+    for item in data_list:
+        writer.writerow(item.split("~"))  # Split each row by "~" and write to CSV
 
     return output.getvalue()
-
 
 def get_company_image(company_name):
     company_images = {
@@ -86,7 +83,7 @@ if st.button("Fetch Data"):
         if is_valid_url(url_input):
             raw_data = fetch_data_from_url(url_input)
             if raw_data:
-                csv_content = generate_csv_content(raw_data)
+                csv_content = list_to_csv(raw_data)
                 st.download_button(
                     label="Download CSV",
                     data=csv_content,

@@ -5,7 +5,7 @@ import time
 import csv
 
 HEADERS = {
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36"
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36"
 }
 
 def duaPune(main_url):
@@ -251,11 +251,11 @@ def extract_query_part_Profesionisti(url):
     query = '&'.join(f"{key}={value[0]}" for key, value in query_params.items())
     return query
     
-def ProfesionistiAl(main_url):
+def ProfesionistiAl(page_link):
     job_links = []
     base_url="https://profesionist.al/?"
     main_url="https://profesionist.al"
-    url_params=extract_query_part_Profesionisti(main_url)
+    url_params=extract_query_part_Profesionisti(page_link)
     page_no=1
     
     while True:
@@ -269,7 +269,7 @@ def ProfesionistiAl(main_url):
         soup = BeautifulSoup(response.text, "html.parser")
         
         a_tag = soup.find('a', string=lambda text: text and text.strip() == "Faqja tjetër »")
-        if a_tag==None:
+        if a_tag==None and page_no!=1:
             break
         else:
             page_no=page_no+1
